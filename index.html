@@ -13,18 +13,18 @@
     <div class="night"></div>
 
     <!-- Happy Birthday arch text -->
-    <svg class="birthday-text" viewBox="0 0 800 115" xmlns="http://www.w3.org/2000/svg">
+    <svg class="birthday-text" viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <path id="birthday-arch" d="M 30,95 Q 400,22 770,95"/>
+        <path id="birthday-arch" d="M 30,115 Q 400,26 770,115"/>
         <linearGradient id="birthday-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="#f48fb1"/>
-          <stop offset="30%"  stop-color="#ffd700"/>
-          <stop offset="50%"  stop-color="#fff4c2"/>
-          <stop offset="70%"  stop-color="#ffd700"/>
-          <stop offset="100%" stop-color="#f48fb1"/>
+          <stop offset="0%"   stop-color="#ff80b4"/>
+          <stop offset="25%"  stop-color="#ffb7c5"/>
+          <stop offset="50%"  stop-color="#fff0f5"/>
+          <stop offset="75%"  stop-color="#ffb7c5"/>
+          <stop offset="100%" stop-color="#ff80b4"/>
         </linearGradient>
-        <filter id="birthday-glow" x="-20%" y="-40%" width="140%" height="180%">
-          <feGaussianBlur stdDeviation="5" result="blur"/>
+        <filter id="birthday-glow" x="-20%" y="-50%" width="140%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
           <feMerge>
             <feMergeNode in="blur"/>
             <feMergeNode in="SourceGraphic"/>
@@ -33,7 +33,7 @@
       </defs>
       <text
         font-family="'Great Vibes', cursive"
-        font-size="60"
+        font-size="74"
         fill="url(#birthday-grad)"
         text-anchor="middle"
         filter="url(#birthday-glow)"

@@ -1192,4 +1192,244 @@ body {
   animation-play-state: paused !important;
 }
 
+/* ─── Click hint on the flowers page ──────────────────────── */
+.click-hint {
+  position: fixed;
+  bottom: 3vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 180, 210, 0.55);
+  font-family: Georgia, serif;
+  font-size: 1.5vmin;
+  letter-spacing: 0.35vmin;
+  z-index: 50;
+  pointer-events: none;
+  white-space: nowrap;
+  animation: hint-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1;   }
+}
+
+/* ─── Card page overlay ───────────────────────────────────── */
+.card-page {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.card-page.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.card-scene {
+  perspective: 1400px;
+  transform: scale(0.85);
+  opacity: 0;
+  transition: transform 0.8s 0.25s ease, opacity 0.8s 0.25s ease;
+}
+
+.card-page.visible .card-scene {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ─── Card container ──────────────────────────────────────── */
+.card {
+  width: 42vmin;
+  height: 58vmin;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  box-shadow:
+    4px 10px 40px rgba(0, 0, 0, 0.65),
+    0  2px  10px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover:not(.is-open) {
+  box-shadow:
+    8px 16px 55px rgba(0, 0, 0, 0.7),
+    0  4px  16px rgba(0, 0, 0, 0.45);
+}
+
+.card.is-open {
+  cursor: default;
+}
+
+/* ─── Card back (inside message panel) ───────────────────── */
+.card__back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, #fffaf8 0%, #fff5f0 100%);
+  border-radius: 1vmin;
+  border: 0.2vmin solid rgba(233, 30, 140, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vmin 3vmin;
+}
+
+.card__message {
+  text-align: center;
+}
+
+.card__msg-stars {
+  color: #e91e8c;
+  font-size: 1.6vmin;
+  letter-spacing: 0.6vmin;
+  margin-bottom: 1.5vmin;
+}
+
+.card__msg-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 5vmin;
+  color: #c2185b;
+  margin: 0 0 1.5vmin;
+  text-shadow: 0 0 10px rgba(233, 30, 140, 0.2);
+}
+
+.card__msg-rule {
+  width: 55%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e91e8c, transparent);
+  margin: 0 auto 2vmin;
+}
+
+/* Message body – left-aligned letter layout */
+.card__msg-body {
+  text-align: left;
+  margin-top: 0.5vmin;
+  width: 100%;
+}
+
+.card__msg-greeting {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3vmin;
+  color: #c2185b;
+  margin: 0 0 1.2vmin;
+}
+
+.card__msg-text {
+  font-family: Georgia, serif;
+  font-size: 1.75vmin;
+  color: #4a1a30;
+  line-height: 1.85;
+  margin: 0 0 1.8vmin;
+}
+
+.card__msg-signoff {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8vmin;
+  color: #c2185b;
+  text-align: right;
+  margin: 0;
+}
+
+/* ─── Card cover (rotates open around the left spine) ────── */
+.card__cover {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.is-open .card__cover {
+  transform: rotateY(-180deg);
+}
+
+.card__cover-front,
+.card__cover-inner {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 1vmin;
+}
+
+/* Front face: visible when card is closed */
+.card__cover-front {
+  background: linear-gradient(155deg, #fff8f2 0%, #fdeef5 55%, #fff5f8 100%);
+  border: 0.25vmin solid rgba(233, 30, 140, 0.25);
+  box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 2.8vmin 2.5vmin 2vmin;
+  overflow: hidden;
+}
+
+.card__cover-front::after {
+  content: '';
+  position: absolute;
+  inset: 0.7vmin;
+  border: 0.12vmin solid rgba(233, 30, 140, 0.2);
+  border-radius: 0.6vmin;
+  pointer-events: none;
+}
+
+/* Inner face of cover (shows to the left when fully open) */
+.card__cover-inner {
+  background: linear-gradient(155deg, #fce4ec 0%, #ffeef5 100%);
+  transform: rotateY(180deg);
+}
+
+/* ─── Address block (top-left of front face) ─────────────── */
+.card__address {
+  font-family: Georgia, serif;
+  font-size: 1.7vmin;
+  color: #6a2a45;
+  line-height: 1.9;
+  border-bottom: 0.1vmin solid rgba(233, 30, 140, 0.15);
+  padding-bottom: 1.2vmin;
+  margin-bottom: 1vmin;
+}
+
+.card__to,
+.card__from {
+  margin: 0;
+}
+
+/* ─── Cover art area ──────────────────────────────────────── */
+.card__cover-art {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5vmin;
+}
+
+.card__cover-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 5.5vmin;
+  color: #c2185b;
+  margin: 0;
+  text-shadow: 0 0 14px rgba(233, 30, 140, 0.35);
+}
+
+.card__koala {
+  width: 78%;
+  object-fit: contain;
+}
+
+/* ─── Tap hint at the bottom of the front cover ──────────── */
+.card__tap-hint {
+  font-family: Georgia, serif;
+  font-size: 1.35vmin;
+  color: rgba(194, 24, 91, 0.45);
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.15vmin;
+}
+
 /*# sourceMappingURL=style.css.map */

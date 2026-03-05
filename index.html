@@ -5,11 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <script src="main.js" type="text/javascript"></script><title>Flowers</title>
 </head>
     
 <body class="not-loaded">
     <div class="night"></div>
+
+    <!-- Happy Birthday arch text -->
+    <svg class="birthday-text" viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="birthday-arch" d="M 30,115 Q 400,26 770,115"/>
+        <linearGradient id="birthday-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#ff80b4"/>
+          <stop offset="25%"  stop-color="#ffb7c5"/>
+          <stop offset="50%"  stop-color="#fff0f5"/>
+          <stop offset="75%"  stop-color="#ffb7c5"/>
+          <stop offset="100%" stop-color="#ff80b4"/>
+        </linearGradient>
+        <filter id="birthday-glow" x="-20%" y="-50%" width="140%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <text
+        font-family="'Great Vibes', cursive"
+        font-size="74"
+        fill="url(#birthday-grad)"
+        text-anchor="middle"
+        filter="url(#birthday-glow)"
+      >
+        <textPath href="#birthday-arch" startOffset="50%">Happy Birthday!</textPath>
+      </text>
+    </svg>
+
     <div class="flowers">
       <div class="flower flower--1">
         <div class="flower__leafs flower__leafs--1">
